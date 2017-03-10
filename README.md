@@ -53,14 +53,21 @@ EXEC [dbo].[usp_MS_AdvancedRestore]
 ```
 
 
-Generate scripts to restore MyDB from full and transaction log backups in G:\backups to 9am October 17, 2016. 
+Generate scripts to restore MyDB from full, differential, and transaction log backups in G:\backups to 9am October 17, 2016. 
 Filter on file names to reduce time using custom pattern.
+Custom patten matching has some shortcuts you can use:
+{dbname} - The original database name
+{qi} - \[0-9]\[0-9]\[0-9]\[0-9]
+{di} - \[0-9]\[0-9]
+
 ```sql
 EXEC [dbo].[usp_MS_AdvancedRestore]
     @RestoreDirectory = 'G:\backups'
     ,@UseFilesFilter = 1
     ,@FullBackupFilePattern = '{dbname}_{qi}_{di}_{di}'
     ,@FullBackupExt = 'full'
+    ,@DiffBackupFilePattern = '{dbname}_{qi}_{di}_{di}_{qi}'
+    ,@DiffBackupExt = 'diff'
     ,@LogBackupFilePattern = '{dbname}_{qi}{qi}_{qi}{qi}'
     ,@LogBackupExt = 'tlog'
     ,@OriginalDatabaseName = 'MyDB'
