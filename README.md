@@ -58,8 +58,11 @@ Filter on file names to reduce time using custom pattern.
 Custom patten matching has some shortcuts you can use:
 
 {dbname} - The original database name
+
 {qi} - \[0-9]\[0-9]\[0-9]\[0-9]
+
 {di} - \[0-9]\[0-9]
+
 
 ```sql
 EXEC [dbo].[usp_MS_AdvancedRestore]
